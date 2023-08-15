@@ -8,6 +8,7 @@ __author__      = 'Iágson Carlos Lima Silva'
 __copyright__   = 'Copyright (c) 2023 @iagsoncarlos'
 
 import os
+from typing import Any
 import cv2
 import time
 import datetime
@@ -26,6 +27,8 @@ class Camera:
             index (int | str): Camera index (default is 0 for the default camera).
         """
         self.capture = cv2.VideoCapture(index)  # Open the camera using the provided index
+        self.fps = 0  # Initialize the FPS attribute to 0
+        self.update_fps() # Update the FPS attribute
         self.recording = False  # Indicates ongoing recording
         self.out = None  # Video writer object
         self.filters = {
@@ -40,6 +43,24 @@ class Camera:
             'Face Detection': lambda img: self.face_detection(img)
             # Add more filters here
         }
+
+    def update_fps(self, duration=3):
+        """
+        Calculate the average frames per second (FPS) over a specified duration.
+
+        Args:
+            duration: Duration in seconds to calculate average FPS over (default is 3 seconds).
+        """
+        frame_count = 0
+        start_time = time.time()
+
+        while time.time() - start_time < duration:
+            ret, _ = self.capture.read()
+            if ret:
+                frame_count += 1
+
+        self.fps = frame_count / duration
+        print(f"[INFO] Average FPS over {duration} seconds: {self.fps:.2f}")
 
     def apply_filter(self, frame, filter_name):
         """
@@ -95,21 +116,9 @@ class Camera:
         frame_width = int(self.capture.get(3))
         frame_height = int(self.capture.get(4))
 
-        max_attempts = 2  # Maximum attempts to wait for FPS normalization
-        for attempt in range(max_attempts):
-            fps = self.capture.get(cv2.CAP_PROP_FPS)
-            if fps is None or fps > 1000:  # Check if fetched FPS is too high (likely an error)
-                print(f"[INFO] Attempt {attempt + 1}/{max_attempts}: FPS reported too high. Waiting to normalize...")
-                time.sleep(2)  # Wait 2 seconds to allow FPS to settle
-            else:
-                break
-        else:
-            print("[INFO] Maximum attempts reached or unable to fetch FPS. Proceeding with default FPS.")
-            fps = 30  # Set default FPS
-
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 
-        self.out = cv2.VideoWriter(video_filename, fourcc, fps, (frame_width, frame_height))
+        self.out = cv2.VideoWriter(video_filename, fourcc, self.fps, (frame_width, frame_height))
         self.recording = True
 
         print("[INFO] Started recording video.")
