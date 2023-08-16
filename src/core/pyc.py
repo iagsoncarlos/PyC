@@ -8,7 +8,6 @@ __author__      = 'Iágson Carlos Lima Silva'
 __copyright__   = 'Copyright (c) 2023 @iagsoncarlos'
 
 import os
-from typing import Any
 import cv2
 import time
 import datetime
@@ -106,12 +105,19 @@ class Camera:
 
         return frame
 
-    def start_recording(self):
+    def start_recording(self, output_path=None):
         """
         Start recording video from the camera.
+
+        Args:
+            output_path (str): Path to save the recorded video. If not provided, a default filename will be used.
         """
         current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        video_filename = f"video_{current_time}.mp4"
+        
+        if output_path is None:
+            video_filename = f"video_{current_time}.mp4"
+        else:
+            video_filename = os.path.join(output_path, f"video_{current_time}.mp4")
 
         frame_width = int(self.capture.get(3))
         frame_height = int(self.capture.get(4))
@@ -133,13 +139,21 @@ class Camera:
 
             print("[INFO] Stopped recording video.")
 
-    def capture_photo(self, frame):
+    def capture_photo(self, frame, output_path=None):
         """
         Capture a photo from the camera and save it as an image file.
+
+        Args:
+            frame (numpy.ndarray): The frame to capture as a photo.
+            output_path (str): Path to save the captured photo. If not provided, a default filename will be used.
         """
         try:
             current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-            photo_filename = f"photo_{current_time}.jpg"
+            
+            if output_path is None:
+                photo_filename = f"photo_{current_time}.jpg"
+            else:
+                photo_filename = os.path.join(output_path, f"photo_{current_time}.jpg")
 
             cv2.imwrite(photo_filename, frame)
 
