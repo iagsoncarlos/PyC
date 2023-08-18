@@ -175,8 +175,7 @@ class Camera:
             if ret:
                 filtered_frame = self.apply_filter(frame, current_filter_name)
                 if self.recording:
-                    bgr_frame = cv2.cvtColor(filtered_frame, cv2.COLOR_GRAY2BGR)
-                    self.out.write(bgr_frame)
+                    self.out.write(filtered_frame)
                 display_frame = filtered_frame
 
                 height, width = display_frame.shape[:2]

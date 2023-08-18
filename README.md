@@ -1,37 +1,74 @@
 # PyC - Camera Application
 
-A graphical user interface for controlling camera functions and displaying live video feed with filters.
+PyC is a user-friendly graphical interface for managing camera functionalities and displaying real-time video feed with interactive filters.
 
 ## Installation and Requirements
 
-- Make sure you have Python 3.x installed.
-- Install required dependencies using the following command:
-  ```sh
-  pip install opencv-python PyQt5
-  ```
+To get started, ensure you have Python 3.x installed on your system. Then, install the necessary dependencies by running the following command:
 
-## Usage
+```sh
+pip install -r requirements.txt
+```
 
-1. Run the application:
+In addition, on Linux systems, you might need to install the `libxcb-xinerama0` package:
+
+```sh
+sudo apt-get install libxcb-xinerama0
+```
+
+## Getting Started
+
+Using the PyC application is hassle-free. Follow these steps to begin your camera adventure:
+
+1. **Clone the Repository**: Begin by cloning the repository with the following command:
+   ```sh
+   git clone https://github.com/iagsoncarlos/PyC.git
+   ```
+
+2. **Navigate to the Project Directory**: Move into the freshly cloned directory using this command:
+   ```sh
+   cd PyC/
+   ```
+
+3. **Run the Application**: Launch the application by executing:
    ```sh
    python src/main.py
    ```
-2. Change the camera source URL using the input field and "Change URL" button.
-3. Use the control buttons to start/stop recording and capture photos.
-4. Click on filter buttons to apply different filters to the camera feed.
+
+Once you've completed these steps, the application will be up and running, ready for your exploration.
+
+## Additional Features
+
+PyC isn't just about basic camera control. It packs these exciting features too:
+
+2. **Change Camera Source URL**: Modify the camera source URL using the input field and the "Change URL" button.
+
+3. **Recording and Capturing**: Seamlessly control recording sessions and snap photos with user-friendly buttons.
+
+4. **Apply Filters**: Unleash your creativity by experimenting with various filters. Each filter adds a distinct effect to the camera feed.
 
 ## Screenshots
 
-![!\[Alt text\](<!\[assets/screenshot.png\](src/assets/screenshot.png)>)](src/assets/screenshot.png)
+![PyC Screenshot](src/assets/screenshot.png)
 
 ## Project Explanation
 
-- `main.py`: This file contains the main application logic and user interface setup.
-- `core/pyc.py`: This module manages camera operations and filter application.
-- `interface/gui.py`: This module manages camera interface with operations and filter application.
-- `models/haarcascade_frontalface_default.xml`:  The `haarcascade_frontalface_default.xml` file is a cascade XML file used for face detection. It is part of the OpenCV library and is widely used in face detection tasks. The file contains information about facial features and appearance patterns that are used by the face detection algorithm.
+- `main.py`: This file holds the core application logic and sets up the user interface.
+- `core/pyc.py`: This module expertly manages camera operations and the application of filters.
+- `interface/gui.py`: This module is responsible for the camera interface, handling operations and filter application.
+- `models/haarcascade_frontalface_default.xml`: This XML file, `haarcascade_frontalface_default.xml`, is a fundamental component for face detection. It belongs to the OpenCV library and is widely employed in face detection tasks. The file encodes critical data about facial attributes and patterns, serving the face detection algorithm.
 
-For more information about the file and its usage, see the [official OpenCV documentation](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml).
+## Documentation
+
+For more detailed information about different aspects of the PyC project, refer to the documentation files in the `docs/` directory:
+
+- `docs/camera.md`: This documentation provides insights into camera operations and how the camera class is implemented.
+
+- `docs/filters.md`: Explore details about the various filters available in PyC, their purposes, and how they can be applied.
+
+- `docs/gui.md`: Understand how the graphical user interface (GUI) of PyC is structured and how it interacts with other modules.
+
+For further understanding of the `haarcascade_frontalface_default.xml` file and its usage, consult the [official OpenCV documentation](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml).
 
 ## License and Copyright
 
@@ -40,4 +77,4 @@ For more information about the file and its usage, see the [official OpenCV docu
 
 ## Contact Information
 
-For questions or feedback, you can reach out to me at @iagsoncarlos
+If you have any questions or feedback, feel free to get in touch with me at @iagsoncarlos. Your input is valued and appreciated.
