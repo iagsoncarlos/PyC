@@ -77,4 +77,4 @@ For further understanding of the `haarcascade_frontalface_default.xml` file and 
 
 ## Contact Information
 
-If you have any questions or feedback, feel free to get in touch with me at @iagsoncarlos. Your input is valued and appreciated.
+For questions or feedback about the PyC - Camera Application, you can reach out to the author, Iágson Carlos Lima Silva, on GitHub: [@iagsoncarlos](https://github.com/iagsoncarlos).
